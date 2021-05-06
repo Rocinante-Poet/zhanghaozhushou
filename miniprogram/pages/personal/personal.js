@@ -97,14 +97,23 @@ Page({
   onReviewTap() {
     wx.navigateTo({ url: '/pages/applies/applies' })
   },
+  // 获取用户信息
+  getUserProfile() {
+    wx.getUserProfile({
+      lang: 'zh_CN',
+      desc: '获取用户头像和昵称',
+      success: (res) => {
+        this.onApplyCloudAccess(res.userInfo) 
+      }
+    }) 
+  },
   // 申请云存储权限
-  onApplyCloudAccess(e) {
-    const { userInfo } = e.detail
+  onApplyCloudAccess(userInfo) { 
     if (userInfo) {
       app.$ready.then(res => {
         const { _id, applyStatus } = res
         if (!applyStatus) { // 尚未申请
-           // 申请中
+          // 申请中
           const { avatarUrl, nickName } = userInfo
           const params = {
             nickName,
@@ -136,9 +145,9 @@ Page({
           })
         }
       })
-      .catch(e => {
-        wx.hideLoading()
-      })
+        .catch(e => {
+          wx.hideLoading()
+        })
     } else {
       wx.showModal({
         title: '提示',
@@ -158,34 +167,6 @@ Page({
     if (isAccountAssistant) {
       wx.navigateTo({
         url: '/pages/procotol/procotol',
-      })
-    }
-  },
-  onIndependentDeployTap() {
-    const { isAccountAssistant } = this.data
-    if (isAccountAssistant) {
-      wx.showModal({
-        title: '提示',
-        content: '请添加专属技术支持微信：yynami',
-        confirmText: '复制微信',
-        success: ({ confirm }) => {
-          if (confirm) {
-            wx.setClipboardData({
-              data: 'yynami',
-              success: () => {
-                wx.showToast({ title: '复制成功' })
-              }
-            })
-          }
-        },
-      })
-    } else {
-            const info = wx.getAccountInfoSync()
-      const { appId } = info.miniProgram
-      wx.navigateToMiniProgram({
-        appId: 'wxac6c35ede13be318',
-        path: '/pages/index/index',
-        extraData: { appId, source: 'customerMiniProgram' }
       })
     }
   },

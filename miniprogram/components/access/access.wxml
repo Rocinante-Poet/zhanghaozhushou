@@ -4,9 +4,7 @@
  ext-class="access-screen-dialog"
  bindclose="onClose">
 	<view slot="desc">
-		<button type="primary"
-		 open-type="getUserInfo"
-		 bindgetuserinfo="onAccessDialogGetUserInfo">授权申请</button>
+		<button type="primary" bindtap="getUserProfile">授权申请</button> 
 		<view class="description-box mt-24">
 			<view class="description">1. 申请云存储需要获取你的头像和昵称信息，以便管理员确认你的身份；</view>
 			<view class="description mt-8">2. 申请前你应该先查看云存储的

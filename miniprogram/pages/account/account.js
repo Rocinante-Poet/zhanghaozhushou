@@ -39,6 +39,7 @@ Page({
   encrypt(data) {
     const key = app.globalData.key
     const { cryptoType } = this.data
+
     if (!key) {
       wx.navigateTo({ url: '/pages/key/key' })
       return

@@ -22,15 +22,23 @@ Component({
     }
   },
   methods: {
-    onAccessDialogGetUserInfo(e) {
-      const { userInfo } = e.detail
-      console.log(userInfo)
+    // 获取用户信息
+    getUserProfile() {
+      wx.getUserProfile({
+        lang: 'zh_CN',
+        desc: '获取用户头像和昵称',
+        success: (res) => {
+          this.onAccessDialogGetUserInfo(res.userInfo)
+        }
+      })
+    },
+    onAccessDialogGetUserInfo(userInfo) {  
       if (userInfo) {
         app.$ready.then(res => {
           console.log(res)
           const { _id, applyStatus } = res
           if (!applyStatus) { // 尚未申请
-             // 申请中
+            // 申请中
             const { avatarUrl, nickName } = userInfo
             const params = {
               nickName,
@@ -61,7 +69,7 @@ Component({
                 } else {
                   wx.showToast({ title: '申请失败，请重试', icon: 'none' })
                 }
-                
+
               })
               .catch(e => {
                 console.log(e)
@@ -76,10 +84,10 @@ Component({
             })
           }
         })
-        .catch(e => {
-          console.log(e)
-          wx.hideLoading()
-        })
+          .catch(e => {
+            console.log(e)
+            wx.hideLoading()
+          })
       } else {
         wx.showModal({
           title: '授权失败',

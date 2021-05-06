@@ -1,1 +1,1 @@
-<web-view src="{{ src }}"></web-view>
+npm<web-view src="{{ src }}"></web-view>

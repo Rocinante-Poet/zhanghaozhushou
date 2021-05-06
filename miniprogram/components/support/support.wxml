@@ -1,5 +1,6 @@
 <!-- 技术支持 -->
 <view class="box" bindtap="onTap">
-  <text class="support">技术支持：</text>
-  <text class="app-name">账号助手</text>
+  <!-- <text class="support">技术支持：</text>
+  <text class="app-name">账号助手</text> -->
+  <text>冲锋，永远年轻！永远热泪盈眶！</text>
 </view>

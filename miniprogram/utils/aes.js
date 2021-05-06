@@ -2,6 +2,7 @@ const CryptoJS = require('../libs/crypto-js/index')
 
 export default {
   encrypt(data, key) {
+    // console.log('sm4加密 data: ' + data + ' key: '+ key)
     if (!key) {
       console.log('key is none')
       return
@@ -10,6 +11,7 @@ export default {
     return encrypted.toString()
   },
   decrypt(data, key) {
+    // console.log('aes解密 data: ' + data + ' key: '+ key)
     if (!key) {
       console.log('key is none')
       return
